@@ -124,6 +124,31 @@ public class DataMapper {
         return userDetails;
     }
 
+    public boolean editPw(int userId, String newPw) {
+        boolean success = false;
+
+        DBconnector.setConnection(null);
+
+        try(Connection connection = DBconnector.connection()){
+            String sql = "UPDATE usertable SET pw = ? WHERE id = ?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, newPw);
+                ps.setInt(2, userId);
+
+                ps.executeUpdate();
+
+                success = true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return success;
+    }
+
 
 //    public static void main(String[] args) {
 //        DataMapper dataMapper = new DataMapper();

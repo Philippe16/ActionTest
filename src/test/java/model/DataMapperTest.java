@@ -87,4 +87,16 @@ class DataMapperTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void editPwTest(){
+        dataMapper.editPw(1, "Secret123");
+        DBconnector.setConnection(null);
+
+        String expected = "User{id=1, fname=Hans, lname=Hansen, pw=Secret123, phone=40404040, address=Rolighedsvej 3}";
+        String actual = dataMapper.getSpecificUserDetails("Hans", "Hansen");
+
+        assertEquals(expected, actual);
+    }
+
+
 }
