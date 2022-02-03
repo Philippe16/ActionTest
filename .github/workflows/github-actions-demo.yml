@@ -49,7 +49,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2 # the action searches for partial matches of the restore keys. When the action finds a partial match, the most recent cache is restored to the path directory.
       - name: Maven verify
         run: mvn test
-#      - name: Maven deploy
+      - name: Maven deploy
       # Some problem with Tomcat prevents deployment: Sometimes when tomcat fails to unregister the JDBC driver a thread is created called: [mysql-cj-abandoned-connection-cleanup]. If this happens Tomcat cannot undeploy the application and the following will not work.
       # Solution: restart the tomcat container.
-#        run: mvn -Dremote.user=${{ secrets.REMOTE_USER }} -Dremote.password=${{ secrets.REMOTE_PW }} tomcat7:deploy
+        run: mvn -Dremote.user=${{ secrets.REMOTE_USER }} -Dremote.password=${{ secrets.REMOTE_PW }} tomcat7:deploy
