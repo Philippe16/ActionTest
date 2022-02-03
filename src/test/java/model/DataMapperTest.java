@@ -49,6 +49,22 @@ class DataMapperTest {
 
     @AfterEach
     void tearDown() {
+        System.out.println("Deleting table...");
+        Connection con = null;
+
+        try {
+            DBconnector.setConnection(null);
+            con = DBconnector.connection();
+
+            String sql = "DROP TABLE usertable";
+            Statement stmt = con.createStatement();
+            Boolean rs = stmt.execute(sql);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test
