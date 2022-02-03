@@ -68,6 +68,33 @@ public class DataMapper {
         return persons;
     }
 
+    public ArrayList<String> getAllUsernames() {
+        ArrayList<String> usernames = new ArrayList<>();
+
+        try(Connection connection = DBconnector.connection()){
+            String sql = "SELECT fname, lname FROM usertable";
+
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs.next()) {
+                do {
+                    String fname = rs.getString("fname");
+                    String lname = rs.getString("lname");
+
+                    usernames.add(fname + " " + lname);
+                } while (rs.next());
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return usernames;
+    }
+
+
 //    public static void main(String[] args) {
 //        DataMapper dataMapper = new DataMapper();
 //        dataMapper.createUser(new User("Frederik","Hansen","Pass123","343434", "Home 3"));
