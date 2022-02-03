@@ -78,4 +78,13 @@ class DataMapperTest {
         User expected = new User("Hans", "Hansen", "Hemmelig123", "40404040", "Rolighedsvej 3");
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void getSpecificUserDetailsTest(){
+        String expected = "User{id=1, fname=Hans, lname=Hansen, pw=Hemmelig123, phone=40404040, address=Rolighedsvej 3}";
+        String actual = dataMapper.getSpecificUserDetails("Hans", "Hansen");
+
+        assertEquals(expected, actual);
+    }
+
 }

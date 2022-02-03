@@ -94,6 +94,36 @@ public class DataMapper {
         return usernames;
     }
 
+    public String getSpecificUserDetails(String fname, String lname){
+        String userDetails = "";
+
+        try(Connection connection = DBconnector.connection()){
+            String sql =
+                    "SELECT * FROM usertable WHERE fname=? AND lname=?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, fname);
+                ps.setString(2, lname);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    int id = (int) rs.getInt("id");
+                    String pw = rs.getString("pw");
+                    String phone = rs.getString("phone");
+                    String address = rs.getString("address");
+
+                    userDetails = new User(id, fname, lname, pw, phone, address).toString();
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return userDetails;
+    }
+
 
 //    public static void main(String[] args) {
 //        DataMapper dataMapper = new DataMapper();
