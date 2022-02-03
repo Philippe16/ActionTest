@@ -1,5 +1,5 @@
 name: Github actions with maven build and deploy
-on: [Push]
+on: [push]
 
 jobs:
   Do-the-travis-thing:
